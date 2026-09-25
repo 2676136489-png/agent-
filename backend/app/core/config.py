@@ -8,34 +8,69 @@
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
+from pathlib import Path
 from typing import Literal
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# `backend/` 的绝对路径（本文件在 backend/app/core/config.py，往上三级）。
+#
+# 为什么必须算出绝对路径，而不是在 env_file 里直接写 ".env"：
+# pydantic-settings 按**进程当前工作目录**解析相对路径。托管沙箱启动服务时
+# 工作目录是 /workspace（不是 backend/），相对路径会让所有配置静默失效 ——
+# 表现为「服务能起、但 Key 全没读到、悄悄退回 Mock」，极难排查。
+_BACKEND_ROOT = Path(__file__).resolve().parents[2]
+
+
+def _select_env_files() -> tuple[Path, ...]:
+    """决定读哪些配置文件。只读**一个**，不做多文件叠加。
+
+    为什么要这么小心 —— 这里踩过一个很深的坑：
+
+    托管沙箱上传时**不按 .gitignore 过滤**，`backend/` 下的所有文件原样上传，
+    包括本地开发用的 `.env`。而 `.env` 里 `LLM_BASE_URL` 指向
+    `http://127.0.0.1:11434/v1`（本地 Ollama），服务器上根本没有 Ollama，
+    于是线上每次都「网络连接失败」。
+
+    原来的设计是 `.env.production` 与 `.env` 同时读、靠后者优先，
+    以为「本地 .env 覆盖部署配置」很方便。但只要本地 `.env` 被上传，
+    它在服务器上就同样生效 —— 优先级叠加载部署场景下是个陷阱。
+
+    现在改成**显式单文件**：
+      - 部署环境（沙箱注入 PORT）：只读 `.env.production`
+      - 本地开发：只读 `.env.local`
+    这样两边不可能互相污染，也不依赖任何优先级规则。
+    本地若想临时试线上配置，用真实环境变量覆盖即可（它的优先级永远最高）。
+
+    文件不存在时返回空元组，pydantic-settings 会退回到字段默认值。
+    """
+    # 沙箱会注入 PORT；本地开发不会。用它区分部署与本地，最可靠。
+    is_deployed = "PORT" in os.environ
+    candidates = (
+        (_BACKEND_ROOT / ".env.production",)
+        if is_deployed
+        else (_BACKEND_ROOT / ".env.local",)
+    )
+    return tuple(p for p in candidates if p.is_file())
 
 
 class Settings(BaseSettings):
     """运行时配置。
 
     字段的取值优先级（高 → 低）：
-    1. 进程真实环境变量（例如 export LOG_LEVEL=DEBUG）
-    2. backend/.env 文件
+    1. 进程真实环境变量（例如 export LLM_API_KEY=xxx）
+    2. 选中的那一个配置文件（部署环境 = .env.production，本地 = .env.local）
     3. 这里写的默认值
     """
 
     # model_config 是 pydantic-settings 的约定写法，不是普通 pydantic 字段。
     model_config = SettingsConfigDict(
-        # 多个 env 文件按**从后往前**的优先级合并：列表里越靠后的文件优先级越高
-        # （pydantic-settings 的约定：后加载的覆盖先加载的）。
-        # 顺序说明：
-        #   ".env"            本地开发配置（含真实 Key，不入库）
-        #   ".env.production" 线上部署配置（无 Key，Mock 模式，入库）
-        # 让本地 .env 优先级更高，是为了「线上模板入库、本地私密配置覆盖它」——
-        # 开发时若误留 .env.production，也不会把本地 Key 冲掉。
-        # 真实环境变量（沙箱注入的）优先级永远高于这两者，这是 pydantic-settings
-        # 的固定行为，适合放「部署时才知道的敏感值」。
-        env_file=(".env.production", ".env"),
+        # 用绝对路径 + 单文件；选择逻辑见 _select_env_files 的说明。
+        # 注意：这里传的是「调用时求值」的元组，模块导入时 os.environ 已就绪。
+        env_file=_select_env_files(),
         env_file_encoding="utf-8",
         extra="ignore",  # .env 里多写了未定义的变量时不要报错
     )
