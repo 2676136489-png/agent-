@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { getSettings } from '../../api/graph'
 import { fetchHealth } from '../../api/health'
-import { ApiClientError } from '../../api/client'
+import { ApiClientError, apiBaseUrlForDisplay } from '../../api/client'
 import type { HealthData } from '../../types/api'
 import { StatusBadge } from '../../components/StatusBadge'
 import { LoadingState } from '../../components/LoadingState'
 import { ErrorState } from '../../components/ErrorState'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
+// 不再自己拼一份 `import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'`：
+// 那是同一份配置的第二个副本，线上同源部署时它会指向错误的 localhost。
+// 统一从 client.ts 取，保证「请求用的地址」和「界面上显示的地址」永远一致。
+const API_BASE_URL = apiBaseUrlForDisplay()
 
 const STATUS_LABEL: Record<string, string> = { ok: '正常', degraded: '降级', error: '异常' }
 const ENV_LABEL: Record<string, string> = { development: '开发', production: '生产', test: '测试' }

@@ -10,12 +10,16 @@
 from __future__ import annotations
 
 import logging
+import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.routes import api_router
 from app.core.config import get_settings
@@ -47,6 +51,94 @@ def _close_sqlite_handles() -> None:
             closer()
         except Exception:  # noqa: BLE001 - 关闭阶段不应再抛出
             logging.getLogger(__name__).exception("关闭 SQLite 连接失败：%s", name)
+
+
+def _frontend_dist_dir() -> Path | None:
+    """定位已构建的前端产物目录；没构建过就返回 None。
+
+    为什么要支持「同端口托管前端」：托管沙箱只暴露**一个** HTTP 端口，
+    没有第二个端口给 Vite dev server。所以线上必须由 FastAPI 同时提供
+    前端页面和 /api，否则前端页面能打开但每个请求都连不上后端。
+
+    目录查找顺序（先看环境变量、再看约定位置）：
+    1. `FRONTEND_DIST` —— 显式指定，部署时可覆盖；
+    2. `backend/../frontend/dist` —— 仓库内的标准构建输出位置。
+
+    **返回 None 是合法状态，不是错误**：后端可以独立运行（开发时前端跑
+    Vite dev server 直连 /api），此时不该因为「没有前端产物」就启动失败。
+    """
+    override = os.environ.get("FRONTEND_DIST", "").strip()
+    candidates = [Path(override)] if override else []
+    candidates.append(Path(__file__).resolve().parents[2] / "frontend" / "dist")
+
+    for candidate in candidates:
+        if (candidate / "index.html").is_file():
+            return candidate
+    return None
+
+
+def _mount_frontend(app: FastAPI) -> bool:
+    """把前端产物挂到根路径，并给 SPA 路由做 fallback。返回是否挂载成功。
+
+    **顺序是关键**：本函数必须在 `include_router(api_router)` **之后**调用。
+    Starlette 按注册顺序匹配路由，根挂载（`/`）如果先注册会把 `/api/...`
+    一并吃掉，表现为「所有接口都返回前端 HTML」——这是最容易踩的坑。
+
+    为什么要 SPA fallback：前端是 React Router 的单页应用，
+    `/workflow`、`/knowledge` 这类路径在服务端并没有对应文件。
+    直接刷新会 404。所以约定：**不是 /api 开头、且磁盘上找不到该文件**的
+    请求，一律返回 index.html，交给前端路由处理。
+    """
+    dist = _frontend_dist_dir()
+    if dist is None:
+        logging.getLogger(__name__).info(
+            "未找到前端构建产物（frontend/dist），仅以 API 模式运行。"
+            "如需同端口提供前端页面，请先在 frontend/ 执行 npm run build。"
+        )
+        return False
+
+    assets_dir = dist / "assets"
+    if assets_dir.is_dir():
+        # 带内容哈希的静态资源，可以放心长缓存
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    index_file = dist / "index.html"
+
+    @app.get(
+        "/{full_path:path}",
+        include_in_schema=False,
+        # 必须显式声明 response_class 并关掉自动 response_model：
+        # 这个处理函数同时可能返回 FileResponse 与 JSONResponse，
+        # 而 FastAPI 会尝试从返回类型注解推导 Pydantic 响应模型，
+        # 遇到 `FileResponse | JSONResponse` 这种联合类型会直接抛
+        # FastAPIError 让应用启动失败。返回的是 Response 对象，
+        # 本来也不需要 Pydantic 做序列化。
+        response_class=FileResponse,
+        response_model=None,
+    )
+    async def _spa_fallback(full_path: str):  # noqa: ANN202 - 返回 Response 联合类型
+        """兜底路由：优先返回磁盘上的真实文件，否则回退到 index.html。"""
+        # `/api/*` 走到这里说明没有任何 API 路由匹配上。
+        # 这里**必须 raise 而不是自己造一个 404 响应**：
+        # `app/core/errors.py` 注册了 StarletteHTTPException 处理器，会把 404
+        # 映射成项目统一的错误信封（`{"success": false, "error": {"code": "not_found"}}`）。
+        # 若我们直接 `return JSONResponse({"detail": "Not Found"})`，虽然状态码同为
+        # 404，但响应体绕过了统一格式，前端按信封解析会拿到 undefined
+        # ——tests/test_health.py 的 `test_unknown_route_returns_unified_error_envelope`
+        # 正是盯这条契约的（它曾因此变红）。
+        if full_path == "api" or full_path.startswith("api/"):
+            raise StarletteHTTPException(status_code=404, detail="Not Found")
+
+        if full_path:
+            candidate = (dist / full_path).resolve()
+            # 防目录穿越：解析后必须仍在 dist 之内
+            if candidate.is_file() and candidate.is_relative_to(dist.resolve()):
+                return FileResponse(candidate)
+
+        return FileResponse(index_file)
+
+    logging.getLogger(__name__).info("已挂载前端静态产物：%s", dist)
+    return True
 
 
 @asynccontextmanager
@@ -84,6 +176,9 @@ def create_app() -> FastAPI:
 
     register_exception_handlers(app)
     app.include_router(api_router, prefix=settings.api_prefix)
+
+    # ⚠️ 必须在 include_router 之后：根挂载会吞掉后注册的路由（详见 _mount_frontend）
+    _mount_frontend(app)
 
     return app
 

@@ -9,7 +9,30 @@ import type { ApiResponse } from '../types/api'
  * 3. 以后要加鉴权头、重试、埋点，只改这一个文件
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
+/**
+ * 后端地址。
+ *
+ * 默认用**同源**（空字符串 = 当前页面的 origin），而不是写死 localhost:8000。
+ * 理由：线上是同端口部署（FastAPI 同时提供页面和 /api），此时相对路径天然
+ * 正确，且不依赖部署域名——域名变了不用重新构建前端。
+ *
+ * 本地开发仍走 Vite dev server（5173）直连后端（8000），此时由
+ * frontend/.env.local 里的 VITE_API_BASE_URL 覆盖成绝对地址。
+ * 这个「开发用绝对、线上用相对」的分工就写在那份 env 文件里。
+ */
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
+
+/**
+ * 供 UI **展示**用的后端地址。
+ *
+ * 与 `API_BASE_URL` 的区别：后者为空字符串时表示同源（请求时用相对路径，
+ * 这是对的），但展示给用户看时空白会让人以为没配。这里把同源解析成
+ * 实际的绝对地址，只用于显示和拼「打开 /api/health 试试」这类链接。
+ */
+export function apiBaseUrlForDisplay(): string {
+  if (API_BASE_URL) return API_BASE_URL
+  return typeof window === 'undefined' ? '' : window.location.origin
+}
 
 // [F1] 默认超时：启动一次研究工作流会跑 1~2 分钟，给足余量；
 // 但也不能无限等，否则网络断开时 UI 会永远停在"执行中"。

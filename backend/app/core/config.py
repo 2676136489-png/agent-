@@ -26,7 +26,16 @@ class Settings(BaseSettings):
 
     # model_config 是 pydantic-settings 的约定写法，不是普通 pydantic 字段。
     model_config = SettingsConfigDict(
-        env_file=".env",  # 相对「运行命令时的当前目录」，所以要在 backend/ 下启动
+        # 多个 env 文件按**从后往前**的优先级合并：列表里越靠后的文件优先级越高
+        # （pydantic-settings 的约定：后加载的覆盖先加载的）。
+        # 顺序说明：
+        #   ".env"            本地开发配置（含真实 Key，不入库）
+        #   ".env.production" 线上部署配置（无 Key，Mock 模式，入库）
+        # 让本地 .env 优先级更高，是为了「线上模板入库、本地私密配置覆盖它」——
+        # 开发时若误留 .env.production，也不会把本地 Key 冲掉。
+        # 真实环境变量（沙箱注入的）优先级永远高于这两者，这是 pydantic-settings
+        # 的固定行为，适合放「部署时才知道的敏感值」。
+        env_file=(".env.production", ".env"),
         env_file_encoding="utf-8",
         extra="ignore",  # .env 里多写了未定义的变量时不要报错
     )
