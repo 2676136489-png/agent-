@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 53,
+  "worst": [
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "系统设置"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "后端连接自检、运行参数与依赖状态。敏感字段仅显示"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "AI Research Workspace · "
+    },
+    {
+      "bg": "rgb(32,54,39)",
+      "cls": "badge badge--ok",
+      "color": "rgb(76, 208, 125)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.57,
+      "text": "已连接"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "运行环境"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "版本"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "API 地址"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "延迟"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "服务器时间（UTC）"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "metric__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "最近检测"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "settings-row__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "应用名称"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "settings-row__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "环境"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+"""Tool abstraction.
+
+[P0] 一个 Tool 就是「模型可以提名、由我们本地执行的一个函数」。
+
+关键设计（模板方法模式）：
+`BaseTool.execute()` 对所有工具都一样，负责：
+    参数校验 → 超时控制 → 异常捕获 → 计时 → 统一 ToolResult
+
+子类只需要实现 `_run()`，也就是「这个工具真正干什么」。
+好处：不可能出现"某个工具忘了处理超时"或"某个工具的异常把整个 Agent 带崩"。
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import time
+from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+
+from pydantic import BaseModel, ValidationError
+
+from app.search.errors import QuotaExhaustedError, SearchProviderError
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class ToolContext:
+    """工具执行时的上下文（只读配置 + 追踪信息）。"""
+
+    run_id: str
+    max_output_chars: int = 3000
+    allowed_domains: list[str] = field(default_factory=list)
+    step_index: int = 0
+    # 工具可以把结构化产物放在这里（例如检索到的引用），
+    # 由 execute() 统一收集进 ToolResult.citations
+    artifacts: dict = field(default_factory=dict)
+
+
+class ToolResult(BaseModel):
+    """[P0] 工具执行的统一结果。
+
+    无论成功失败都返回这个对象 —— 工具失败**不是异常**，而是 Agent 可以观察并应对的事实。
+    """
+
+    ok: bool
+    tool: str
+    output: str = ""          # 成功时的输出（已截断、已清洗）
+    summary: str = ""         # 给前端/日志看的短摘要
+    error: str | None = None
+    error_kind: str | None = None  # invalid_args | timeout | execution_error | blocked
+    duration_ms: int = 0
+    # 结构化引用（哪些 document/chunk 支撑了这次结果）。
+    # 有了它，最终答案才能反推出「这句话来自哪个文件的第几页」。
+    citations: list[dict] = []
+
+    def to_observation(self) -> str:
+        """把结果序列化成「要喂回给模型」的文本。
+
+        失败也要返回文本：否则模型不知道发生了什么，只会反复重试同一个动作。
+        """
+        if self.ok:
+            return self.output
+        return f"[工具执行失败] tool={self.tool} kind={self.error_kind} error={self.error}"
+
+
+class BaseTool(ABC):
+    """所有工具的基类。"""
+
+    name: str
+    description: str
+    args_schema: type[BaseModel]
+    timeout_seconds: float = 10.0
+
+    async def execute(self, raw_args: dict, ctx: ToolContext) -> ToolResult:
+        """执行工具并保证不抛异常（除系统级错误外）。
+
+        [P0] 四层保护：
+        1. 参数校验失败 → ok=False（模型传错参数是很常见的，不算崩溃）
+        2. 搜索配额/限流 → 翻译成 error_kind，绝不归类成 execution_error（见下）
+        3. 超时 → 用 asyncio.wait_for 强制结束
+        4. 其他异常 → 捕获并记录，绝不让异常冒泡到 Agent 主循环
+
+        [T02] 为什么搜索类异常要单独拦一层：
+        `TavilySearchProvider` 失败时抛的是 `SearchProviderError`（携带 error_kind），
+        如果直接落到第 4 层，会被吞成 `execution_error` ——
+        「额度耗尽」这个最关键的信号就丢了，上层只会看到「工具失败」，
+        于是又去重试，继续烧积分（PRD P-1）。
+        """
+        started = time.perf_counter()
+
+        try:
+            args = self.args_schema.model_validate(raw_args)
+        except ValidationError as exc:
+            problems = "; ".join(
+                f"{'.'.join(str(p) for p in err['loc'])}: {err['msg']}" for err in exc.errors()[:3]
+            )
+            return self._failure("invalid_args", f"参数不合法：{problems}", started)
+
+        try:
+            output = await asyncio.wait_for(self._run(args, ctx), timeout=self.timeout_seconds)
+        except QuotaExhaustedError as exc:
+            # 额度耗尽：不重试（重试就是继续烧积分），且必须被上层看见
+            logger.warning("搜索额度耗尽：%s", exc)
+            return self._failure("quota_exhausted", str(exc), started)
+        except SearchProviderError as exc:
+            # 上游限流/服务不可用：保留真实 error_kind，让上层决定要不要重试
+            logger.warning("搜索失败 kind=%s：%s", exc.error_kind, exc)
+            return self._failure(exc.error_kind, str(exc), started)
+        except TimeoutError:  # Python 3.11+ 起 asyncio.TimeoutError 就是内置 TimeoutError
+            logger.warning("tool timeout: %s", self.name)
+            return self._failure("timeout", f"工具执行超过 {self.timeout_seconds} 秒", started)
+        except Exception as exc:  # noqa: BLE001 - 工具层的任何异常都必须被兜住
+            logger.exception("tool execution failed: %s", self.name)
+            return self._failure("execution_error", str(exc), started)
+
+        duration_ms = int((time.perf_counter() - started) * 1000)
+        truncated = output[: ctx.max_output_chars]
+        return ToolResult(
+            ok=True,
+            tool=self.name,
+            output=truncated,
+            summary=f"{len(truncated)} 字符",
+            duration_ms=duration_ms,
+            citations=list(ctx.artifacts.get("citations", [])),
+        )
+
+    @abstractmethod
+    async def _run(self, args: BaseModel, ctx: ToolContext) -> str:
+        """工具真正的逻辑。返回要给模型的文本。"""
+        raise NotImplementedError
+
+    def _failure(self, kind: str, message: str, started: float) -> ToolResult:
+        return ToolResult(
+            ok=False,
+            tool=self.name,
+            error=message,
+            error_kind=kind,
+            summary="失败",
+            duration_ms=int((time.perf_counter() - started) * 1000),
+        )
+
+    def function_schema(self) -> dict:
+        """[P0] Function Schema：告诉模型「这个工具叫什么、能干什么、需要什么参数」。
+
+        它就是 args_schema 的 JSON Schema + 名字 + 描述。
+        模型只能根据这段描述来决定怎么用，所以 description 写得越具体，调用越准。
+        """
+        return {
+            "name": self.name,
+            "description": self.description,
+            "parameters": self.args_schema.model_json_schema(),
+        }

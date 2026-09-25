@@ -1,0 +1,110 @@
+{
+  "navInit": {
+    "coreVisible": 0,
+    "drawerInDom": false,
+    "menuTotal": 0,
+    "menuVisible": 0,
+    "menuVisibleLabels": [],
+    "moreBtnVisible": false,
+    "navInnerScrollW": null,
+    "navInnerW": null,
+    "nonCoreVisible": 0,
+    "toggleVisible": false
+  },
+  "pages": [
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "概览",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "研究工作流",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "研究规划",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "智能体",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "知识库",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "教程",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "研究报告",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "效果评估",
+      "primary": null,
+      "scrollW": 1440
+    },
+    {
+      "activeTitle": "",
+      "bodyScrollW": 1440,
+      "clicked": false,
+      "innerW": 1440,
+      "overflowPx": 0,
+      "page": "系统设置",
+      "primary": null,
+      "scrollW": 1440
+    }
+  ],
+  "viewport": {
+    "h": 900,
+    "w": 1440
+  }
+}

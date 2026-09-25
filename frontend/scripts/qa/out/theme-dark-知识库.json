@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 17,
+  "worst": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "检索知识库"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "知识库"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "上传 PDF / Markdown / TXT，"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "plan__heading",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "文档列表（2）"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "plan__heading",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "检索测试"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "研究需要引用你的私有 / 内部资料，而非仅依赖公"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "上传文档 → 等待「就绪」→ 用「检索测试」输入"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "支持 .pdf .md .txt，单文件 ≤ 1"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "text/markdown · 1 个片段 · "
+    },
+    {
+      "bg": "rgb(26,48,32)",
+      "cls": "badge badge--ok",
+      "color": "rgb(76, 208, 125)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 7.14,
+      "text": "就绪"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__title",
+      "color": "rgb(245, 245, 247)",
+      "fontSize": 22,
+      "isLarge": false,
+      "ratio": 15.46,
+      "text": "喂一份资料，它就能引用"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "button",
+      "color": "rgb(245, 245, 247)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 15.46,
+      "text": "刷新"
+    }
+  ]
+}

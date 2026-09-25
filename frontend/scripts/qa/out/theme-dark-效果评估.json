@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 21,
+  "worst": [
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "效果评估"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "link-button",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "刷新"
+    },
+    {
+      "bg": "rgb(61,47,28)",
+      "cls": "badge badge--warn",
+      "color": "rgb(255, 159, 60)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.34,
+      "text": "待确认"
+    },
+    {
+      "bg": "rgb(61,47,28)",
+      "cls": "badge badge--warn",
+      "color": "rgb(255, 159, 60)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.34,
+      "text": "已取消"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "stat-card__value stat-card__value--error",
+      "color": "rgb(255, 107, 107)",
+      "fontSize": 36,
+      "isLarge": true,
+      "ratio": 6.52,
+      "text": "25"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "统计研究工作流的运行情况与分布，帮助判断整体可用"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "plan__heading",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "最近运行"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "2026/9/24 23:53:55"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "2026/9/24 23:53:42"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "2026/9/24 23:50:49"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "2026/9/24 23:47:14"
+    },
+    {
+      "bg": "rgb(32,54,39)",
+      "cls": "badge badge--ok",
+      "color": "rgb(76, 208, 125)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.57,
+      "text": "已完成"
+    }
+  ]
+}

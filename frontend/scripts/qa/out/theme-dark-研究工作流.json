@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 49,
+  "worst": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "启动研究工作流"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "tip__label",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "提示"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary state__action",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "开始研究"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "研究工作流"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "link-button",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "填入示例"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "可循环"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "与研究决策循环"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "人工确认闸门"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "link-button",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "刷新"
+    },
+    {
+      "bg": "rgb(61,47,28)",
+      "cls": "badge badge--warn",
+      "color": "rgb(255, 159, 60)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.34,
+      "text": "待确认"
+    },
+    {
+      "bg": "rgb(61,47,28)",
+      "cls": "badge badge--warn",
+      "color": "rgb(255, 159, 60)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.34,
+      "text": "已取消"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "基于 LangGraph：理解 → 计划 → 研"
+    }
+  ]
+}

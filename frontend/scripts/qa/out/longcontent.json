@@ -1,0 +1,27 @@
+{
+  "doc": {
+    "iw": 375,
+    "sw": 367
+  },
+  "longP": {
+    "cw": 325,
+    "overflow": true,
+    "sw": 2955
+  },
+  "markdownBody": {
+    "cw": 325,
+    "overflow": true,
+    "sw": 2955
+  },
+  "mdOverflowWrap": "normal",
+  "mdWordBreak": "normal",
+  "table": {
+    "cw": 842,
+    "overflow": false,
+    "sw": 842
+  },
+  "tableCS": {
+    "display": "table",
+    "overflowX": "visible"
+  }
+}

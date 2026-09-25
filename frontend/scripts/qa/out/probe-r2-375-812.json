@@ -1,0 +1,180 @@
+{
+  "navInit": {
+    "coreVisible": 0,
+    "drawerInDom": false,
+    "menuTotal": 9,
+    "menuVisible": 0,
+    "menuVisibleLabels": [],
+    "moreBtnVisible": false,
+    "navInnerScrollW": 323,
+    "navInnerW": 323,
+    "nonCoreVisible": 0,
+    "toggleVisible": true
+  },
+  "pages": [
+    {
+      "activeTitle": "提一个问题，拿到一份有出处的研究报告。",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "概览",
+      "primary": {
+        "entryCardCount": 4,
+        "entryCardsFirstScreen": 1,
+        "entryGrid": {
+          "bottom": 1425,
+          "firstScreen": true,
+          "h": 642,
+          "left": 22,
+          "right": 345,
+          "top": 783,
+          "w": 323
+        },
+        "h1": {
+          "firstScreen": true,
+          "text": "提一个问题，拿到一份有出处的研究报告。"
+        },
+        "ledeFirstScreen": true,
+        "primaryButton": {
+          "bottom": 419,
+          "firstScreen": true,
+          "h": 44,
+          "left": 22,
+          "right": 345,
+          "text": "开始研究",
+          "top": 375,
+          "w": 323
+        },
+        "primaryCardBadge": "推荐",
+        "primaryCardBorderColor": "rgba(0, 113, 227, 0.25)",
+        "secondaryCardBorderColor": "rgba(0, 0, 0, 0.09)"
+      },
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "跑一次完整的研究",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "研究工作流",
+      "primary": {
+        "bottom": 560,
+        "firstScreen": true,
+        "h": 44,
+        "left": 60,
+        "right": 192,
+        "tag": "BUTTON",
+        "text": "启动研究工作流",
+        "top": 516,
+        "w": 132
+      },
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "先规划，再行动",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "研究规划",
+      "primary": {
+        "bottom": 564,
+        "firstScreen": true,
+        "h": 44,
+        "left": 60,
+        "right": 178,
+        "tag": "BUTTON",
+        "text": "生成研究计划",
+        "top": 520,
+        "w": 118
+      },
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "让智能体自己跑研究",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "智能体",
+      "primary": {
+        "bottom": 560,
+        "firstScreen": true,
+        "h": 44,
+        "left": 60,
+        "right": 167,
+        "tag": "BUTTON",
+        "text": "运行 Agent",
+        "top": 516,
+        "w": 107
+      },
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "喂一份资料，它就能引用",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "知识库",
+      "primary": {
+        "bottom": 558,
+        "firstScreen": true,
+        "h": 44,
+        "left": 60,
+        "right": 172,
+        "tag": "LABEL",
+        "text": "选择文件上传",
+        "top": 514,
+        "w": 112
+      },
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "三步上手，把问题跑成研究报告。",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "教程",
+      "primary": null,
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "已生成的研究报告",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "研究报告",
+      "primary": null,
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "运行效果一览",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "效果评估",
+      "primary": null,
+      "scrollW": 367
+    },
+    {
+      "activeTitle": "运行配置与连接",
+      "bodyScrollW": 367,
+      "clicked": true,
+      "innerW": 375,
+      "overflowPx": -8,
+      "page": "系统设置",
+      "primary": null,
+      "scrollW": 367
+    }
+  ],
+  "viewport": {
+    "h": 812,
+    "w": 375
+  }
+}

@@ -1,0 +1,44 @@
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.pytest_tmp/
+.coverage
+htmlcov/
+
+# ----- Node -----
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+# Vite 的配置热重载缓存（含时间戳文件名，每次改动都会新增，纯垃圾）
+vite.config.ts.timestamp-*.mjs
+
+# ----- Environment（绝不能提交）-----
+# 注意：`.env` 与 `.env.local` 里含真实 API Key / 生产凭据。
+# 下面的 `!.env.example` 是**白名单**，只放行示例文件（示例里不含真实值）。
+.env
+.env.local
+.env.*.local
+.env.production
+!.env.example
+
+# ----- Editors / OS -----
+.vscode/
+.idea/
+.claude/
+.codebuddy/
+.workbuddy/
+.DS_Store
+Thumbs.db
+
+# ----- Project data / logs -----
+data/
+storage/
+*.log
+*.err

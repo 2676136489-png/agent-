@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 29,
+  "worst": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "运行 Agent"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "tip__label",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "提示"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary state__action",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "填入示例"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "智能体工作台"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "link-button",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "填入示例"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "输入一个研究任务，智能体自主决定调用哪些工具——"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "field__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "研究任务"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "至少 8 个字"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "field__label",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "最大步数：6"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "Agent 会自己决定搜索与抓取，达到足够证据后"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "state__desc",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "在上方输入研究任务并点「运行 Agent」，这里"
+    },
+    {
+      "bg": "rgb(22,22,23)",
+      "cls": "",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 7.03,
+      "text": "「智能体」是一个端到端的自主研究执行器。你只需给"
+    }
+  ]
+}

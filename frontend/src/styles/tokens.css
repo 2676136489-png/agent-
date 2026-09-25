@@ -1,0 +1,214 @@
+/* ===== tokens.css · 设计令牌（唯一来源，无选择器样式） ===== */
+
+/* =========================================================================
+   AI 研究工作台 · 设计令牌
+   所有颜色 / 字号 / 间距 / 圆角 / 阴影 / 层级 / 动效一律引用本文件令牌，
+   业务 CSS 中禁止出现硬编码散值。明暗两套主题在此统一定义。
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* ---- 颜色语义（沿用现有命名） ---- */
+  --page: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f5f5f7;
+  --ink: #1d1d1f;
+  --ink-soft: #424245;
+  --muted: #6e6e73;
+  /* §4.1 修订（M2）：原 #86868b 在 --surface-alt#f5f5f7 上仅 3.33:1，
+     #6b6b70 → 4.87:1。深色侧同步提到 #98989d（6.30:1）。 */
+  --faint: #6b6b70;
+  --line: rgba(0, 0, 0, 0.09);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  /* §4.1：承载白字的强调底（唯一允许在彩色底上写 #fff 的家族；白字实测 ≥4.69:1） */
+  --accent-strong: #0071e3;
+  /* 上述底色上的文字（显式化：禁止再写死 #fff） */
+  --on-accent: #ffffff;
+  /* tinted 底 / 中性底上的 accent 文字（--accent 当文字用只有 4.19:1，见 M3） */
+  --accent-ink: #0062c4;
+  --danger: #d70015;
+  --danger-bg: #fff5f5;
+  --ok: #008a34;
+  --ok-bg: #f0fbf3;
+  --warn: #b25000;
+  --warn-bg: #fff8ef;
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --overlay: rgba(0, 0, 0, 0.42);
+
+  /* ---- 新增：消除硬编码 rgba(0,113,227,*) 与状态边框 ---- */
+  --accent-tint: rgba(0, 113, 227, 0.1);
+  --accent-tint-strong: rgba(0, 113, 227, 0.18);
+  --accent-border: rgba(0, 113, 227, 0.25);
+  --ok-border: rgba(0, 138, 52, 0.25);
+  --danger-border: rgba(215, 0, 21, 0.25);
+  --warn-border: rgba(178, 80, 0, 0.3);
+  --focus-ring: 0 0 0 3px rgba(0, 113, 227, 0.15);
+  /* 焦点环（§9）：描边色取 --ink（accent 在 --accent-strong 底上会消失），柔光晕用 accent-tint */
+  --focus-outline: var(--ink);
+  --focus-halo: 0 0 0 4px var(--accent-tint);
+  --hover-bg: rgba(0, 0, 0, 0.02);
+  --scroll-thumb: rgba(0, 0, 0, 0.16);
+  --nav-group-line: var(--line-strong);
+
+  /* ---- §4.1 新增：骨架 / 下沉容器 / 环境光 ---- */
+  --skeleton-bg: var(--surface-alt);
+  --skeleton-sheen: rgba(255, 255, 255, 0.55);
+  --surface-sunken: var(--surface-alt);
+  --line-sunken: var(--line);
+  --ambient-glow: var(--accent-tint);
+
+  /* ---- §4.1 新增：toast / kbd / 行长 / 动效 / 层级 ---- */
+  --toast-bg: var(--surface);
+  --toast-border: var(--line-strong);
+  --toast-shadow: var(--shadow-lg);
+  --kbd-bg: var(--surface-alt);
+  --measure-lede: 62ch;
+  --dur-short: 120ms;
+  --z-toast: 500;
+
+  /* ---- 间距刻度（4px 基准） ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px; /* section 节奏 */
+  --space-10: 64px; /* hero 上留白 */
+
+  /* ---- 字号层级（9 级 + hero/h2） ---- */
+  --text-hero: clamp(2rem, 4.5vw, 3rem);
+  --text-h2: clamp(1.6rem, 3vw, 2.25rem);
+  --text-3xl: 28px;
+  --text-2xl: 22px;
+  --text-xl: 18px;
+  --text-lg: 16px;
+  --text-md: 15px;
+  --text-base: 14px;
+  --text-sm: 13px;
+  --text-xs: 12px;
+
+  /* ---- 行高 / 字重 ---- */
+  --leading-tight: 1.25;
+  --leading-snug: 1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ---- 圆角 ---- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* ---- 阴影（浅色） ---- */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.28);
+
+  /* ---- 排版 / 栅格 / 层级 / 动效 ---- */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter,
+    sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --max-width: 1080px; /* PRD Q4：保持 1080，仅统一内边距与 gap */
+  --content-measure: 68ch; /* 正文行长上限（P1-6） */
+  --gutter: 44px; /* 桌面容器左右内边距 */
+  --grid-gap: var(--space-4);
+  --nav-height: 52px;
+
+  --z-base: 0;
+  --z-track: 1;
+  --z-nav: 100;
+  --z-dropdown: 200;
+  --z-scrim: 290;
+  --z-drawer: 300;
+  --z-modal: 400;
+
+  --dur-fast: 160ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+  font-family: var(--font);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #000000;
+  --surface: #1d1d1f;
+  --surface-alt: #161617;
+  --ink: #f5f5f7;
+  --ink-soft: #d2d2d7;
+  --muted: #a1a1a6;
+  /* §4.1 修订（M2）：#86868b 本已达标（4.99:1），一并提到 #98989d（6.30:1）与浅色侧同构 */
+  --faint: #98989d;
+  --line: rgba(255, 255, 255, 0.11);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --accent: #2997ff;
+  --accent-hover: #4aa8ff;
+  /* 深色主按钮：白字在 --accent 上只有 3.01:1 → 调暗为承载白字的专用底（M1 / Q10） */
+  --accent-strong: #0f6fd6;
+  --on-accent: #ffffff;
+  /* 深色下 tinted 底上的 accent 文字（--accent 为 4.46:1） */
+  --accent-ink: #6ab7ff;
+  --danger: #ff6b6b;
+  --danger-bg: rgba(255, 59, 48, 0.14);
+  --ok: #4cd07d;
+  --ok-bg: rgba(48, 209, 88, 0.14);
+  --warn: #ff9f3c;
+  --warn-bg: rgba(255, 159, 10, 0.14);
+  --nav-bg: rgba(22, 22, 23, 0.72);
+  --overlay: rgba(0, 0, 0, 0.68);
+
+  /* 深色下提高强调/状态色不透明度，保证对比度可辨（P2-5） */
+  --accent-tint: rgba(41, 151, 255, 0.16);
+  --accent-tint-strong: rgba(41, 151, 255, 0.24);
+  --accent-border: rgba(41, 151, 255, 0.3);
+  --ok-border: rgba(76, 208, 125, 0.3);
+  --danger-border: rgba(255, 107, 107, 0.3);
+  --warn-border: rgba(255, 159, 60, 0.32);
+  --focus-ring: 0 0 0 3px rgba(41, 151, 255, 0.24);
+  --focus-outline: var(--ink);
+  --focus-halo: 0 0 0 4px var(--accent-tint-strong);
+  --hover-bg: rgba(255, 255, 255, 0.03);
+  --scroll-thumb: rgba(255, 255, 255, 0.2);
+  --nav-group-line: var(--line-strong);
+
+  /* ---- 深色侧的新增令牌取值 ---- */
+  --skeleton-bg: rgba(255, 255, 255, 0.07);
+  --skeleton-sheen: rgba(255, 255, 255, 0.1);
+  --surface-sunken: #0b0b0d;
+  --line-sunken: var(--line-strong);
+  --ambient-glow: rgba(41, 151, 255, 0.08);
+  --toast-bg: #262629;
+  --toast-border: var(--line-strong);
+  --toast-shadow: var(--shadow-xl);
+  --kbd-bg: var(--surface-alt);
+
+  /* 深色阴影：显著提高不透明度补偿黑底不可见 */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.55);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.65);
+  --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.8);
+}

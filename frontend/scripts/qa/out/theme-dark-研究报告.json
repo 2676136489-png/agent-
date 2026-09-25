@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 14,
+  "worst": [
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 4.65,
+      "text": "研究报告"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__subtitle",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "在这里查看所有已完成的研究报告，点击条目可阅读全"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "12 小时前"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "13 小时前"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "14 小时前"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "22 小时前"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "23 小时前"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "hint",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "1 天前"
+    },
+    {
+      "bg": "rgb(32,54,39)",
+      "cls": "badge badge--ok",
+      "color": "rgb(76, 208, 125)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 6.57,
+      "text": "已完成"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "panel__title",
+      "color": "rgb(245, 245, 247)",
+      "fontSize": 22,
+      "isLarge": false,
+      "ratio": 15.46,
+      "text": "已生成的研究报告"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "report-card__title",
+      "color": "rgb(245, 245, 247)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 15.46,
+      "text": "研究 2026 年 AI Agent 开发岗位的"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "report-card__title",
+      "color": "rgb(245, 245, 247)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 15.46,
+      "text": "研究向量数据库在 RAG 场景下的选型要点"
+    }
+  ]
+}

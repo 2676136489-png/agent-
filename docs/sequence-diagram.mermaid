@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant U as 用户
+  participant App as App.tsx (壳/导航)
+  participant DB as Dashboard
+  participant WF as ResearchWorkflow
+  participant API as api/*
+
+  U->>App: 点击「研究工作流」入口卡
+  App->>App: setPage('workflow')（PageKey 不变）
+  App->>WF: 渲染 <ResearchWorkflow/>
+  WF->>WF: 渲染 page__head + page__primary（首屏主操作）
+  U->>WF: 输入问题 → 点击「启动研究工作流」
+  WF->>API: startResearch({question,maxIterations,threadId})
+  WF->>API: subscribe(threadId) 订阅 SSE
+  API-->>WF: 事件流（进度）
+  WF-->>U: 实时进度 / 结果区更新
+  WF->>API: resumeResearch(approved)（中断点确认）
+  API-->>WF: 最终报告 → RunView 折叠卡展示
+  Note over WF: 说明区为底部折叠卡，默认收起，不阻塞主操作

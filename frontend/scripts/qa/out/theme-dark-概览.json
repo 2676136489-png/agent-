@@ -1,0 +1,126 @@
+{
+  "suspectCount": 1,
+  "suspects": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "badge badge--info card__badge",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 1,
+      "text": "推荐"
+    }
+  ],
+  "theme": "dark",
+  "total": 49,
+  "worst": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "badge badge--info card__badge",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 1,
+      "text": "推荐"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "开始研究"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "可循环"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "与研究决策循环"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "flow__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "人工确认闸门"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "hero-welcome",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "AI 研究工作台"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "研究流水线"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "事件流进度"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "写报告前确认"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "结论带引用"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "研究流程"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "card__desc",
+      "color": "rgb(161, 161, 166)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 6.54,
+      "text": "给个任务，自动查资料并给出带引用的答案。"
+    }
+  ]
+}

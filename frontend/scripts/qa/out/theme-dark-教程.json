@@ -1,0 +1,116 @@
+{
+  "suspectCount": 0,
+  "suspects": [],
+  "theme": "dark",
+  "total": 66,
+  "worst": [
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "直接开始研究"
+    },
+    {
+      "bg": "rgb(41,151,255)",
+      "cls": "button button--primary",
+      "color": "rgb(255, 255, 255)",
+      "fontSize": 14,
+      "isLarge": false,
+      "ratio": 3.02,
+      "text": "开始研究"
+    },
+    {
+      "bg": "rgb(31,49,67)",
+      "cls": "scenario__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 4.41,
+      "text": "场景一"
+    },
+    {
+      "bg": "rgb(31,49,67)",
+      "cls": "scenario__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 4.41,
+      "text": "场景二"
+    },
+    {
+      "bg": "rgb(31,49,67)",
+      "cls": "scenario__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 4.41,
+      "text": "场景三"
+    },
+    {
+      "bg": "rgb(31,49,67)",
+      "cls": "scenario__tag",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 12,
+      "isLarge": false,
+      "ratio": 4.41,
+      "text": "场景四"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "适用场景"
+    },
+    {
+      "bg": "rgb(29,29,31)",
+      "cls": "",
+      "color": "rgb(41, 151, 255)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.58,
+      "text": "交互逻辑"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "hero-welcome",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 15,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "使用教程"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "功能模块"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "常见场景"
+    },
+    {
+      "bg": "rgb(0,0,0)",
+      "cls": "eyebrow",
+      "color": "rgb(134, 134, 139)",
+      "fontSize": 13,
+      "isLarge": false,
+      "ratio": 5.8,
+      "text": "分步指引"
+    }
+  ]
+}

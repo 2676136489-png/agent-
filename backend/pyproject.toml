@@ -1,0 +1,56 @@
+# 依赖的唯一来源。用 uv 管理：
+#   uv sync              # 创建 .venv 并安装依赖 + 生成 uv.lock
+#   uv add <package>     # 加依赖（自动写入这里并更新锁文件）
+#   uv run pytest        # 在 .venv 里执行命令
+#
+# 为什么不再保留 requirements.txt：两处维护必然会出现版本不一致，
+# 而 uv.lock 记录了「精确到补丁号」的版本，换机器能装出一模一样的环境。
+
+[project]
+name = "ai-research-workspace-backend"
+version = "0.1.0"
+description = "AI Research Workspace backend"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.5.0",
+    # OpenAI 兼容 SDK：换 base_url 就能切 OpenAI / DeepSeek / 通义 / Moonshot / 混元
+    "openai>=1.50.0",
+    # 外部调用的指数退避重试，比手写 while + sleep 可靠
+    "tenacity>=9.0.0",
+    "httpx>=0.28.1",
+    "pypdf>=6.19.0",
+    "numpy>=2.4.6",
+    "python-multipart>=0.0.32",
+    "langgraph>=1.2.12",
+]
+
+[dependency-groups]
+dev = [
+    # FastAPI TestClient 的底层依赖
+    "httpx>=0.27.0",
+    "httpx2>=0.1.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.8.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+# 让 async def test_* 自动被当作异步测试执行（无需逐个加 @pytest.mark.asyncio）
+asyncio_mode = "auto"
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

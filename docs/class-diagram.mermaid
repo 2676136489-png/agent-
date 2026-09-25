@@ -1,0 +1,49 @@
+classDiagram
+  class App {
+    +page: PageKey
+    +theme: 'light'|'dark'
+    +navOpen: boolean
+    +navigate(key)$
+  }
+  class EmptyState {
+    +icon? : string
+    +title : string
+    +description? : string
+    +actionLabel? : string
+    +onAction? : () => void
+  }
+  class LoadingState {
+    +variant : 'card'|'list'|'table'|'inline'
+    +rows? : number
+    +label? : string
+  }
+  class ErrorState {
+    +code? : string
+    +message : string
+    +tips? : ReactNode
+    +onRetry? : () => void
+    +retryLabel? : string
+  }
+  class StatusBadge {
+    +variant : 'ok'|'error'|'warn'|'info'|'running'|'neutral'
+    +children : ReactNode
+    +className? : string
+  }
+  class CollapsibleCard {
+    +title : ReactNode
+    +defaultOpen : boolean
+    +badge? : ReactNode
+    +children : ReactNode
+  }
+  class ProcessTimeline {
+    +items : ProcessTimelineItem[]
+  }
+  class ToolCallCard {
+    +call : ToolCallRecord
+  }
+  App ..> StatusBadge
+  App ..> EmptyState
+  App ..> LoadingState
+  App ..> ErrorState
+  CollapsibleCard ..> StatusBadge
+  ProcessTimeline ..> ToolCallCard

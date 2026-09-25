@@ -1,0 +1,148 @@
+{
+  "btnText": "待确认研究 2026 年 AI Agent 开发岗位的主要技术要求，并分析共同点",
+  "chain": [
+    {
+      "cls": "run-list__btn",
+      "display": "flex",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 489,
+      "tag": "BUTTON",
+      "w": 491
+    },
+    {
+      "cls": "run-list__item",
+      "display": "list-item",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "auto",
+      "overflowX": "visible",
+      "scrollW": 491,
+      "tag": "LI",
+      "w": 491
+    },
+    {
+      "cls": "run-list",
+      "display": "grid",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "490.891px",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 491,
+      "tag": "UL",
+      "w": 247
+    },
+    {
+      "cls": "activity",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 511,
+      "tag": "SECTION",
+      "w": 289
+    },
+    {
+      "cls": "page__status",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 512,
+      "tag": "SECTION",
+      "w": 289
+    },
+    {
+      "cls": "page page--flush",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 528,
+      "tag": "SECTION",
+      "w": 323
+    },
+    {
+      "cls": "shell",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 529,
+      "tag": "DIV",
+      "w": 323
+    },
+    {
+      "cls": "main",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 551,
+      "tag": "MAIN",
+      "w": 367
+    },
+    {
+      "cls": "site-shell",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 551,
+      "tag": "DIV",
+      "w": 367
+    },
+    {
+      "cls": "",
+      "display": "block",
+      "flex": "0 1 auto",
+      "gridTemplateColumns": "none",
+      "minWidth": "0px",
+      "overflowX": "visible",
+      "scrollW": 551,
+      "tag": "DIV",
+      "w": 367
+    }
+  ],
+  "kids": [
+    {
+      "cls": "badge badge--warn",
+      "flex": "0 1 auto",
+      "minWidth": "auto",
+      "overflow": "visible",
+      "scrollW": 64,
+      "tag": "SPAN",
+      "w": 66,
+      "whiteSpace": "normal"
+    },
+    {
+      "cls": "run-list__q",
+      "flex": "1 1 auto",
+      "minWidth": "0px",
+      "overflow": "hidden",
+      "scrollW": 379,
+      "tag": "SPAN",
+      "w": 322,
+      "whiteSpace": "nowrap"
+    },
+    {
+      "cls": "hint",
+      "flex": "0 0 auto",
+      "minWidth": "auto",
+      "overflow": "visible",
+      "scrollW": 53,
+      "tag": "SPAN",
+      "w": 53,
+      "whiteSpace": "normal"
+    }
+  ],
+  "vw": 375
+}
