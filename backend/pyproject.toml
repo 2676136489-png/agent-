@@ -37,6 +37,35 @@ dev = [
     "ruff>=0.8.0",
 ]
 
+# 显式声明构建后端与包布局。
+#
+# 为什么必须写这一段：setuptools 在「扁平布局」下会去猜哪个顶层目录是包，
+# 当存在**多个**顶层目录时（这里是 app/ 、storage/ 、frontend_dist/）它无法
+# 判断，直接报错：
+#     error: Multiple top-level packages discovered in a flat-layout
+# 这个错误原先没暴露，是因为本地用 `uv sync`（只装依赖、不构建本项目）；
+# 而托管沙箱走 `pip install .`，会触发真正的构建阶段。
+#
+# 处理方式：显式声明只有 app 是包，并让 setuptools 不要自动发现。
+# 同时把 storage/ 与 frontend_dist/ 排除 —— 它们是**运行时数据目录**
+# （SQLite 文件、前端静态产物），不是 Python 包。
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# 只打包 `app` —— 必须显式声明，否则 setuptools 的 flat-layout 自动发现在
+# 看到 app/、storage/、frontend_dist/ 并列时会直接报错：
+#   error: Multiple top-level packages discovered in a flat-layout
+# （沙箱部署走 `pip install .`，这个错误会直接让部署失败。）
+# `scripts/` 有意不打包：它是本地运维工具（填 Key 后重新部署用），
+# 服务器上不需要它，也不该让 key 相关脚本扩散到运行环境。
+packages = ["app"]
+
+[tool.setuptools.package-data]
+# 子包要一起带上（app/api、app/core 等）；不写这个只会装顶层的 app
+app = ["**/*.py"]
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]

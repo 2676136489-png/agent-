@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     # auto = 有 Key 走真实 API，没 Key 自动退化成离线 Mock（保证本地/CI 可跑）
     llm_provider: str = "auto"
     # 留空则用 SDK 默认（OpenAI）；换厂商只改这两个值：
-    #   DeepSeek:  https://api.deepseek.com        + deepseek-chat
+    #   DeepSeek:  https://api.deepseek.com        + deepseek-flash
     #   通义千问:  https://dashscope.aliyuncs.com/compatible-mode/v1 + qwen-plus
     llm_base_url: str = ""
     # SecretStr：打印 Settings 时会显示 '**********'，避免 Key 被日志泄露
@@ -150,6 +150,16 @@ class Settings(BaseSettings):
     # CORS 白名单：允许哪些「浏览器来源」访问后端。用逗号分隔的字符串而不是 list，
     # 因为环境变量天然是字符串，直接解析 list 容易踩坑（需要写 JSON 数组）。
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+
+    # ----- 前端静态产物（单端口部署用）-----
+    # 由后端托管前端构建产物时，指定 dist 目录。空 = 走默认查找顺序
+    # （`backend/frontend_dist` → `backend/../frontend/dist`）。
+    #
+    # 为什么必须在这里声明成 Settings 字段，而不是在代码里直接读 os.environ：
+    # pydantic-settings 读取 .env 文件后**不会**把未知的键注入 os.environ，
+    # 所以「写进 .env 但没在 Settings 里声明」的配置项会被静默忽略 ——
+    # 表现为「明明配了却不生效」。声明成字段后，它才能被 .env 文件真正驱动。
+    frontend_dist: str = ""
 
     @property
     def cors_origins_list(self) -> list[str]:

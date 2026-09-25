@@ -18,6 +18,10 @@ dist-ssr/
 *.local
 # Vite 的配置热重载缓存（含时间戳文件名，每次改动都会新增，纯垃圾）
 vite.config.ts.timestamp-*.mjs
+# 前端构建产物在 backend/ 下的自包含副本（单端口部署用）。
+# 它是 frontend/dist 的拷贝，属于构建产物，不入库；但**部署上传时需要它存在**，
+# 所以是「git 忽略、本地保留」——两边都需要，只是用途不同。
+backend/frontend_dist/
 
 # ----- Environment（绝不能提交）-----
 # 注意：`.env` 与 `.env.local` 里含真实 API Key / 生产凭据。
@@ -26,9 +30,12 @@ vite.config.ts.timestamp-*.mjs
 .env.local
 .env.*.local
 !.env.example
-# `.env.production` 是**可提交**的：它只含 Mock 模式配置，所有 Key 都留空，
-# 线上部署靠它把服务拉起来（不含任何真实凭据，所以放行）。
-!.env.production
+# `.env.production` 曾是可提交的（当时只含 Mock 配置、Key 全空）。
+# 自 2026-09-25 起改为**线上真实运行配置**：里面填入了真实 LLM / 搜索 Key，
+# 因此必须与 `.env` 同等对待 —— 只存在于本地与服务器，绝不入库。
+# 如果你是从 GitHub clone 的，这个文件不存在是正常的；
+# 照 `.env.example` 建一份，或向项目维护者索取部署配置。
+.env.production
 
 # ----- Editors / OS -----
 .vscode/
@@ -38,6 +45,10 @@ vite.config.ts.timestamp-*.mjs
 .workbuddy/
 .DS_Store
 Thumbs.db
+
+# 部署平台生成的元数据文件（发布应用时由平台写入项目根目录）。
+# 它是本地部署状态的记录，不是项目源码，换机器就失效，不该入库。
+.wbapp_*.genie
 
 # ----- Project data / logs -----
 data/

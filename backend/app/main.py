@@ -10,7 +10,6 @@
 from __future__ import annotations
 
 import logging
-import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -61,14 +60,32 @@ def _frontend_dist_dir() -> Path | None:
     前端页面和 /api，否则前端页面能打开但每个请求都连不上后端。
 
     目录查找顺序（先看环境变量、再看约定位置）：
-    1. `FRONTEND_DIST` —— 显式指定，部署时可覆盖；
-    2. `backend/../frontend/dist` —— 仓库内的标准构建输出位置。
+    1. `FRONTEND_DIST` —— 显式指定。既支持绝对路径，也支持**相对路径**：
+       相对路径会**相对于 backend/ 目录**解析（`app/main.py` 的 parents[1]），
+       而不是相对于进程的当前工作目录 —— 否则从别的 cwd 启动（比如 systemd
+       或容器里 `cd /`）就会解析到错误位置，表现为「明明配了却找不到前端」。
+    2. `backend/frontend_dist` —— 随 backend 一起上传的自包含副本（线上用）。
+    3. `backend/../frontend/dist` —— 仓库里前端构建的标准输出位置（本地用）。
 
     **返回 None 是合法状态，不是错误**：后端可以独立运行（开发时前端跑
     Vite dev server 直连 /api），此时不该因为「没有前端产物」就启动失败。
     """
-    override = os.environ.get("FRONTEND_DIST", "").strip()
-    candidates = [Path(override)] if override else []
+    backend_root = Path(__file__).resolve().parents[1]
+
+    # 配置优先：`FRONTEND_DIST`（Settings 字段，可由 .env 驱动）。
+    # 用 get_settings() 而不是直接读 os.environ：pydantic-settings 不会把
+    # .env 里的未知键写回 os.environ，直接读环境变量会漏掉 .env 里的配置。
+    try:
+        configured = get_settings().frontend_dist.strip()
+    except Exception:  # noqa: BLE001 - 配置异常不该让静态托管整段失效
+        configured = ""
+
+    candidates: list[Path] = []
+    if configured:
+        raw = Path(configured)
+        # 绝对路径直接用；相对路径锚到 backend/，不依赖 cwd
+        candidates.append(raw if raw.is_absolute() else backend_root / raw)
+    candidates.append(backend_root / "frontend_dist")
     candidates.append(Path(__file__).resolve().parents[2] / "frontend" / "dist")
 
     for candidate in candidates:
